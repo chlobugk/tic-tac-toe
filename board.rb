@@ -50,7 +50,7 @@ class Board
 
 		win_array.each do |win|
 			row = 0
-			
+
 			win.each do |pos|
 
 
@@ -67,10 +67,73 @@ class Board
 	end
 
 
+	def fill_seq(comp)
 
+		position = 0
 
+		ttt_board.length.times do
 
-
-
-
+			if ttt_board[position] == ''
+				ttt_board[position] = comp 
+				break
+			else 
+				position += 1
+			end
+		end
+	end
+	
 end
+
+
+
+
+
+
+
+
+# class Player
+
+# 	attr_accessor :name, :marker
+
+# 	def initialize
+# 		print 'Enter your name here: '
+# 		@name = gets.chomp
+
+# 		print 'Enter X or O to choose your marker: '
+# 		@marker = gets.chomp
+# 	end
+
+
+# end
+
+
+# class Game
+
+
+# 	def final_game(marker)
+		
+# 		final = open_position?(marker)
+# 		valid_input?(final)
+
+# 			if winner?(final) == true
+# 				print @name + ' wins!'
+# 			else 
+# 				print 'Tie game!'
+# 			end
+# 	end
+
+# end
+
+
+
+
+
+	 
+
+
+
+
+
+
+
+

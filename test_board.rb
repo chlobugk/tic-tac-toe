@@ -68,7 +68,7 @@ class TestTicTacToe < MiniTest::Test
 	def test_winner_at_pos_048_with_x
 		board = Board.new
 		marker = 'x'
-		board.ttt_board = ['x', 'x', 'o', 'o', 'x', 'x', 'o', 'o', 'x']
+		board.ttt_board = ['x', '', 'o', 'o', 'x', 'x', '', 'o', 'x']
 		assert_equal(true, board.winner?(marker))
 	end
 
@@ -79,8 +79,54 @@ class TestTicTacToe < MiniTest::Test
 		assert_equal(false, board.winner?(marker))
 	end
 
+end
 
 
+class TestSequentialComp < MiniTest::Test 
 
+	def test_fills_1st_spot
+		board = Board.new
+		board.ttt_board = ['', '', 'o', 'o', '', 'x', '', 'x', 'x']
+		comp = 'o'
+		board.fill_seq(comp)
+		assert_equal(['o', '', 'o', 'o', '', 'x', '', 'x', 'x'], board.ttt_board)
+	end
+
+	def test_fills_3rd_spot
+		board = Board.new
+		board.ttt_board = ['o', 'x', '', 'o', 'o', '', '', 'x', 'x']
+		comp = 'x'
+		board.fill_seq(comp)
+		assert_equal(['o', 'x', 'x', 'o', 'o', '', '', 'x', 'x'], board.ttt_board)
+	end
 
 end
+
+
+
+
+# class TestPlayerMarker < MiniTest::Test 
+
+# 	def test_player_info
+# 		player = Player.new
+# 		assert_equal('Chloe', player.name)
+# 		assert_equal('X', player.marker)
+# 	end
+
+# end
+
+
+
+# class TestGame < MiniTest::Test 
+
+# 	def test_player2_wins
+# 		board = Board.new
+# 		marker = 'X'
+# 		board.ttt_board = ['X', 'X', 'X', 'O', 'X', 'O', 'O', 'X', 'X']
+# 		assert_equal('Chloe', player.name)
+# 		assert_equal('X', player.marker)
+# 		assert_equal('Chloe wins!', board.final_game(marker))
+# 	end
+
+
+# end
