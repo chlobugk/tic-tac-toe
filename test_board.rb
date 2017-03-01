@@ -100,6 +100,39 @@ class TestSequentialComp < MiniTest::Test
 		assert_equal(['o', 'x', 'x', 'o', 'o', '', '', 'x', 'x'], board.ttt_board)
 	end
 
+	def test_fills_last_spot
+		board = Board.new
+		board.ttt_board = ['x', 'x', 'o', 'o', 'o', 'x', 'o', 'x', '']
+		comp = 'x'
+		board.fill_seq(comp)
+		assert_equal(['x', 'x', 'o', 'o', 'o', 'x', 'o', 'x', 'x'], board.ttt_board)
+	end
+
+end
+
+
+class TestRandomComp < MiniTest::Test
+
+	def test_random_spotz_o
+		board = Board.new
+		board.ttt_board = ['', '', 'o', 'o', '', 'x', '', 'x', 'x']
+		comp = 'O'
+		board.fill_rand(comp)
+		assert_equal(true, board.ttt_board.include?('O'))
+	end
+
+	def test_random_spot_x
+		board = Board.new
+		board.ttt_board = ['', '', 'o', 'o', '', 'x', 'o', 'x', 'x']
+		comp = 'X'
+		board.fill_rand(comp)
+		assert_equal(true, board.ttt_board.include?('X'))
+	end
+
+
+
+
+
 end
 
 
