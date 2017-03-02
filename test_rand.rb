@@ -23,3 +23,23 @@ class TestTTTRandom < MiniTest::Test
 		assert_equal(true, [3, 4, 5, 6, 7, 8].include?(player.fill_move(['X', 'O', 'X', '', '', '', '', '', ''])))	
 	end
 end
+
+
+# class TestRandomComp < MiniTest::Test
+
+# 	def test_random_spotz_o
+# 		board = Board.new
+# 		board.ttt_board = ['', '', 'o', 'o', '', 'x', '', 'x', 'x']
+# 		comp = 'O'
+# 		board.fill_rand(comp)
+# 		assert_equal(true, board.ttt_board.include?('O'))
+# 	end
+
+# 	def test_random_spot_x
+# 		board = Board.new
+# 		board.ttt_board = ['', '', 'o', 'o', '', 'x', 'o', 'x', 'x']
+# 		comp = 'X'
+# 		board.fill_rand(comp)
+# 		assert_equal(true, board.ttt_board.include?('X'))
+# 	end
+# end

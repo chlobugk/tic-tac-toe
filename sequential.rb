@@ -10,3 +10,18 @@ class Sequential_AI
 		board.index('')
 	end
 end
+
+# def fill_seq(comp)
+
+	# 	position = 0
+
+	# 	ttt_board.length.times do
+
+	# 		if ttt_board[position] == ''
+	# 			ttt_board[position] = comp 
+	# 			break
+	# 		else 
+	# 			position += 1
+	# 		end
+	# 	end
+	# end
