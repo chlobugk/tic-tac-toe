@@ -4,12 +4,12 @@ require_relative 'random.rb'
 
 class ConsoleGame
 
-	attr_accessor :board, :p1, :p2, :active_player
+	attr_accessor :p1, :p2, :board, :active_player
 
 	def initialize(p1, p2)
-		@board = Board.new
 		@p1 = p1
 		@p2 = p2
+		@board = Board.new
 		@active_player = p1
 	end
 
@@ -23,6 +23,7 @@ class ConsoleGame
 	    puts " #{board.ttt_board[3]} | #{board.ttt_board[4]} | #{board.ttt_board[5]} "
 	    puts "--------"
 	    puts " #{board.ttt_board[6]} | #{board.ttt_board[7]} | #{board.ttt_board[8]} "
+	    puts "                "
 	end
 
 	def fill_move
@@ -43,21 +44,23 @@ class ConsoleGame
 		end
 	end
 
-	# def check_winner
-	# 	if board.winner?(active_player.marker)
-	# 		true
-	# 	else
-	# 		false
-	# 	end
-	# end
+	def check_winner
+		if board.winner?(p1.marker)
+			true
+		elsif board.winner?(p2.marker)
+			true
+		elsif
+			false
+		end
+	end
 
-	# def check_tie
-	# 	if board.full_board?
-	# 		true
-	# 	else
-	# 		false
-	# 	end
-	# end
+	def check_tie
+		if board.full_board?
+			true
+		else
+			false
+		end
+	end
 
 
 end

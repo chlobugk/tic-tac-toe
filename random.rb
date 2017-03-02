@@ -7,6 +7,7 @@ class Random_AI
 	end
 
 	def fill_move(board)
+		
 		board.each_index.select{ |empty| board[empty] == ''}.sample
 	end
 end

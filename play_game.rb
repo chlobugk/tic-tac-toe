@@ -7,11 +7,13 @@ game = ConsoleGame.new(p1, p2)
 
 game.intro
 
-until game.board.winner?(p1 || p2) || game.board.full_board?
-
-	game.fill_move
-	game.update_position
-	game.change_player
-end
-
+until game.check_tie || game.check_winner 
 game.create_board
+game.fill_move
+game.update_position
+game.change_player
+end
+game.create_board
+
+
+
