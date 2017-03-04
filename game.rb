@@ -33,7 +33,6 @@ class ConsoleGame
 	end
 
 	def update_position
-		position = fill_move
 		marker = active_player.marker
 		if board.open_position?(@position)
 			board.update_position(@position, marker)
