@@ -2,7 +2,7 @@ class User
 
 	attr_accessor :marker
 
-	def initialize
+	def initialize(marker)
 		@marker = marker
 	end
 

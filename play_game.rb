@@ -1,8 +1,7 @@
 require_relative 'game.rb'
 
 p1 = Random_AI.new('X')
-p2 = Sequential_AI.new('O')
-
+p2 = User.new('O')
 
 
 
@@ -17,6 +16,5 @@ game.update_position
 game.change_player
 end
 game.create_board
-
 
 
