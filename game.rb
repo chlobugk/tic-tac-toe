@@ -1,16 +1,18 @@
 require_relative 'board.rb'
 require_relative 'sequential.rb'
 require_relative 'random.rb'
+require_relative 'user.rb'
 
 class ConsoleGame
 
-	attr_accessor :p1, :p2, :board, :active_player
+	attr_accessor :p1, :p2, :board, :active_player, :position
 
 	def initialize(p1, p2)
 		@p1 = p1
 		@p2 = p2
 		@board = Board.new
 		@active_player = p1
+		
 	end
 
 	def intro 
@@ -27,13 +29,18 @@ class ConsoleGame
 	end
 
 	def fill_move
-		active_player.fill_move(board.ttt_board)
+		@position = active_player.fill_move(board.ttt_board)
 	end
 
 	def update_position
 		position = fill_move
 		marker = active_player.marker
-		board.update_position(position, marker)
+		if board.open_position?(@position)
+			board.update_position(@position, marker)
+		else
+			puts "Invalid, please pick again."
+			fill_move
+		end
 	end
 
 	def change_player
