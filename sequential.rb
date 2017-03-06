@@ -7,7 +7,7 @@ class Sequential_AI
 	end
 
 	def fill_move(board)
-		board.index('')
+		board.index(' ')
 	end
 end
 

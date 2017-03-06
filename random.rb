@@ -8,7 +8,7 @@ class Random_AI
 
 	def fill_move(board)
 		
-		board.each_index.select{ |empty| board[empty] == ''}.sample
+		board.each_index.select{ |empty| board[empty] == ' '}.sample
 	end
 end
 
