@@ -17,7 +17,7 @@ def choose_p1
 	elsif player1 ==3
 		$p1 = Sequential_AI.new('X')
 	else
-		puts "Invalid, please pick 1, 2, or 3."
+		puts "Oops, please pick 1, 2, or 3."
 		choose_p1		
 	end
 end
@@ -33,7 +33,7 @@ def choose_p2
 	elsif player2 ==3
 		$p2 = Sequential_AI.new('O')
 	else
-		puts "Invalid, please pick 1, 2, or 3."
+		puts "Oops, please pick 1, 2, or 3."
 		choose_p2		
 	end
 end
@@ -54,11 +54,11 @@ game.change_player
 end
 game.create_board
 
-if game.check_tie
-	puts "It's a tie game folks!"
-elsif 
+if game.check_winner
 	game.change_player
 	puts "#{game.active_player.marker} wins!"
+elsif 
+	puts "It's a tie game folks!"
 end
 
 
