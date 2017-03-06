@@ -19,15 +19,31 @@ class Unbeatable_AI
 				[ttt_board[0], ttt_board[4], ttt_board[8]],
 				[ttt_board[2], ttt_board[4], ttt_board[6]]
 						]
+
+				marker1 = 'x'
+				marker2 = 'o'
+
+				if marker == marker1
+					opponent = marker2
+				else
+					opponent = marker1
+				end
+
 			results = ttt_board.index(' ')
 			board_pos.each_with_index do |win_combo, index|
+
 				p win_combo
+				
 				if win_combo.count(marker) == 2 && win_combo.count(' ') == 1
+					winning_index = win_combo.index(' ')
+					results = win_array[index][winning_index]
+				elsif win_combo.count(opponent) == 2 && win_combo.count(' ') == 1
 					winning_index = win_combo.index(' ')
 					results = win_array[index][winning_index]
 				else
 					results
 				end
+
 			end
 			results
 
