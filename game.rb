@@ -20,11 +20,14 @@ class ConsoleGame
 	end
 
 	def create_board
+
 		puts " #{board.ttt_board[0]} | #{board.ttt_board[1]} | #{board.ttt_board[2]} "
 		puts "-----------"
 	    puts " #{board.ttt_board[3]} | #{board.ttt_board[4]} | #{board.ttt_board[5]} "
 	    puts "-----------"
 	    puts " #{board.ttt_board[6]} | #{board.ttt_board[7]} | #{board.ttt_board[8]} "
+	    puts "                "
+	    puts " It's #{active_player.marker}'s turn."
 	    puts "                "
 	end
 
