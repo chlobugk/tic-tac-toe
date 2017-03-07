@@ -2,6 +2,7 @@ require_relative 'board.rb'
 require_relative 'sequential.rb'
 require_relative 'random.rb'
 require_relative 'user.rb'
+require_relative 'unbeatable.rb'
 
 class ConsoleGame
 
@@ -72,33 +73,37 @@ class ConsoleGame
 	end
 
 	def choose_p1
-	puts "Select player X by entering 1-3. Human = 1; Random_Computer = 2; Sequential_Computer = 3"
+	puts "Select player X by entering 1-4. Human = 1; Sequential_Computer = 2; Random_Computer = 3; Unbeatable_Computer = 4"
 	@player1input = gets.chomp.to_i
 
 		if player1input == 1
 			@p1 = User.new('X')
 		elsif player1input == 2
-			@p1 = Random_AI.new('X')
-		elsif player1input == 3
 			@p1 = Sequential_AI.new('X')
+		elsif player1input == 3
+			@p1 = Random_AI.new('X')
+		elsif player1input == 4
+			@p1 = Unbeatable_AI.new('X')
 		else
-			puts "Oops, please pick 1, 2, or 3."
+			puts "Oops, please pick 1, 2, 3, or 4."
 			choose_p1		
 		end
 	end
 
 	def choose_p2
-		puts "Select player O by entering 1-3. Human = 1; Random_Computer = 2; Sequential_Computer = 3"
+		puts "Select player O by entering 1-4. Human = 1; Sequential_Computer = 2; Random_Computer = 3; Unbeatable_Computer = 4"
 		@player2input = gets.chomp.to_i
 
 		if player2input == 1
 			@p2 = User.new('O')
 		elsif player2input == 2
-			@p2 = Random_AI.new('O')
-		elsif player2input ==3
 			@p2 = Sequential_AI.new('O')
+		elsif player2input == 3
+			@p2 = Random_AI.new('O')
+		elsif player2input == 4
+			@p2 = Unbeatable_AI.new('O')
 		else
-			puts "Oops, please pick 1, 2, or 3."
+			puts "Oops, please pick 1, 2, 3, or 4."
 			choose_p2		
 		end
 	end
