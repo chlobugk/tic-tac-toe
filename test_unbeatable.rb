@@ -29,7 +29,7 @@ class TestUnbeatable < MiniTest::Test
 	def test_no_win_x
 		player = Unbeatable_AI.new('x') 
 		ttt_board = ['x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-		assert_equal(4, player.fill_move(ttt_board))
+		assert_equal(1, player.fill_move(ttt_board))
 	end
 
 	def test_win_at_5
@@ -52,7 +52,7 @@ class TestUnbeatable < MiniTest::Test
 
 	def test_block2
 		player = Unbeatable_AI.new('x') 
-		ttt_board = ['o', ' ', ' ', ' ', 'o', ' ', ' ', 'x', ' ']
+		ttt_board = ['o', '  ', ' ', ' ', 'o', ' ', ' ', 'x', ' ']
 		assert_equal(8, player.fill_move(ttt_board))
 	end
 
@@ -64,8 +64,8 @@ class TestUnbeatable < MiniTest::Test
 
 	def test_fork
 		player = Unbeatable_AI.new('x')
-		ttt_board = [' ', ' ', 'o', ' ', ' ', ' ', '', ' ', ' ']
-		assert_equal(4, player.fill_move(ttt_board))
+		ttt_board = [' ', 'x', ' ', ' ', 'o', 'x', ' ', 'o', ' ']
+		assert_equal(2, player.check_fork(ttt_board))
 	end
 
 
