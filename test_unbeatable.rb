@@ -68,5 +68,10 @@ class TestUnbeatable < MiniTest::Test
 		assert_equal(2, player.check_fork(ttt_board))
 	end
 
+	def test_block_fork
+		player = Unbeatable_AI.new('o')
+		ttt_board = [' ', 'x', ' ', ' ', 'o', 'x', ' ', 'o', ' ']
+		assert_equal(2, player.block_fork(ttt_board))
+	end
 
 end
