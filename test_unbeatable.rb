@@ -98,4 +98,22 @@ class TestUnbeatable < MiniTest::Test
 		assert_equal(3, player.block_fork(ttt_board))
 	end
 
+	def test_take_center
+		player = Unbeatable_AI.new('x')
+		ttt_board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+		assert_equal(4, player.center(ttt_board))
+	end
+
+	def test_take_center_with_x_on_board
+		player = Unbeatable_AI.new('o')
+		ttt_board = [' ', ' ', 'x', ' ', ' ', ' ', ' ', ' ', ' ']
+		assert_equal(4, player.center(ttt_board))
+	end
+
+	def test_centers_already_taken
+		player = Unbeatable_AI.new('x')
+		ttt_board = [' ', ' ', ' ', ' ', 'o', ' ', ' ', ' ', ' ']
+		assert_equal(9, player.center(ttt_board))
+	end
+
 end

@@ -171,6 +171,17 @@ require_relative 'board.rb'
 	end
 
 
+	def center(ttt_board)
+
+		if ttt_board[4] == ' '
+			results = 4
+		else
+			results = 9
+		end
+		results
+	end
+
+
 
 
 
