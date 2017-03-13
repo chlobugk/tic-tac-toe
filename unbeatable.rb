@@ -37,8 +37,11 @@ require_relative 'board.rb'
 			empty_corner(ttt_board) < 9
 			results = empty_corner(ttt_board)
 
-		else empty_side(ttt_board)
+		elsif 
+		 	 empty_side(ttt_board) < 9
 			results = empty_side(ttt_board)
+		else
+			results = ttt_board.index = (' ')
 		end
 		results
 	end

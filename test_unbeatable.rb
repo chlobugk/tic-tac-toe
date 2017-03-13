@@ -244,5 +244,13 @@ class TestUnbeatable < MiniTest::Test
 		assert_equal(1, player.fill_move(ttt_board))
 	end
 
+	def test_block_at_3
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['o', ' ', 'x', ' ', 'x', ' ', 'o', ' ', ' ']
+		assert_equal(3, player.fill_move(ttt_board))
+	end
+
+
+
 
 end

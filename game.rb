@@ -28,7 +28,11 @@ class ConsoleGame
 	    puts "-----------"
 	    puts " #{board.ttt_board[6]} | #{board.ttt_board[7]} | #{board.ttt_board[8]} "
 	    puts "                "
-	    puts " It's #{active_player.marker}'s turn."
+	    if board.ttt_board.include?(' ')
+	   		 puts "It's #{active_player.marker}'s turn."
+	   	else
+	   		puts ""
+	   	end
 	    puts "                "
 	end
 
@@ -43,6 +47,7 @@ class ConsoleGame
 		else
 			puts "Invalid, please pick again."
 			fill_move
+			update_position
 		end
 	end
 
@@ -73,17 +78,17 @@ class ConsoleGame
 	end
 
 	def choose_p1
-	puts "Select player X by entering 1-4. Human = 1; Sequential_Computer = 2; Random_Computer = 3; Unbeatable_Computer = 4"
+	puts "Select player x by entering 1-4. Human = 1; Sequential_Computer = 2; Random_Computer = 3; Unbeatable_Computer = 4"
 	@player1input = gets.chomp.to_i
 
 		if player1input == 1
-			@p1 = User.new('X')
+			@p1 = User.new('x')
 		elsif player1input == 2
-			@p1 = Sequential_AI.new('X')
+			@p1 = Sequential_AI.new('x')
 		elsif player1input == 3
-			@p1 = Random_AI.new('X')
+			@p1 = Random_AI.new('x')
 		elsif player1input == 4
-			@p1 = Unbeatable_AI.new('X')
+			@p1 = Unbeatable_AI.new('x')
 		else
 			puts "Oops, please pick 1, 2, 3, or 4."
 			choose_p1		
@@ -91,17 +96,17 @@ class ConsoleGame
 	end
 
 	def choose_p2
-		puts "Select player O by entering 1-4. Human = 1; Sequential_Computer = 2; Random_Computer = 3; Unbeatable_Computer = 4"
+		puts "Select player o by entering 1-4. Human = 1; Sequential_Computer = 2; Random_Computer = 3; Unbeatable_Computer = 4"
 		@player2input = gets.chomp.to_i
 
 		if player2input == 1
-			@p2 = User.new('O')
+			@p2 = User.new('o')
 		elsif player2input == 2
-			@p2 = Sequential_AI.new('O')
+			@p2 = Sequential_AI.new('o')
 		elsif player2input == 3
-			@p2 = Random_AI.new('O')
+			@p2 = Random_AI.new('o')
 		elsif player2input == 4
-			@p2 = Unbeatable_AI.new('O')
+			@p2 = Unbeatable_AI.new('o')
 		else
 			puts "Oops, please pick 1, 2, 3, or 4."
 			choose_p2		
