@@ -28,7 +28,7 @@ class ConsoleGame
 	    puts "-----------"
 	    puts " #{board.ttt_board[6]} | #{board.ttt_board[7]} | #{board.ttt_board[8]} "
 	    puts "                "
-	    if check_winner == true
+	    if check_winner || check_tie
 	    	puts "GAME OVER"
 	   	else
 	   		puts "It's #{active_player.marker}'s turn."
