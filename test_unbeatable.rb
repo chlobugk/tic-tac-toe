@@ -68,6 +68,12 @@ class TestUnbeatable < MiniTest::Test
 		assert_equal(2, player.check_fork(ttt_board))
 	end
 
+	def test_fork_4
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['x', 'o', ' ', 'o', ' ', ' ', 'x', ' ', ' ']
+		assert_equal(4, player.check_fork(ttt_board))
+	end
+
 	def test_block_fork_2
 		player = Unbeatable_AI.new('o')
 		ttt_board = [' ', 'x', ' ', ' ', 'o', 'x', ' ', 'o', ' ']
@@ -78,6 +84,18 @@ class TestUnbeatable < MiniTest::Test
 		player = Unbeatable_AI.new('x')
 		ttt_board = ['x', 'o', ' ', 'o', ' ', ' ', ' ', ' ', 'x']
 		assert_equal(4, player.block_fork(ttt_board))
+	end
+
+	def test_X_blocks_O_corners_opposite
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['o', ' ', ' ', ' ', 'x', ' ', ' ', ' ', 'o']
+		assert_equal(3, player.block_fork(ttt_board))
+	end
+
+	def test_X_blocks_O_corners
+		player = Unbeatable_AI.new('o')
+		ttt_board = [' ', ' ', 'x', ' ', 'o', ' ', 'x', ' ', ' ']
+		assert_equal(3, player.block_fork(ttt_board))
 	end
 
 end

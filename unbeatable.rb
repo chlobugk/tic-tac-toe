@@ -107,11 +107,11 @@ require_relative 'board.rb'
 			end
 
 			if result_array.find { |combo| result_array.count(combo) > 1 } == nil #checks if a match is found
-				move = 9
+				results = 9
 			else
-				move = result_array.find { |combo| result_array.count(combo) > 1 } #if match is found it takes the move
+				results = result_array.find { |combo| result_array.count(combo) > 1 } #if match is found it takes the move
 			end
-			move
+			results
 	end
 
 
@@ -158,14 +158,16 @@ require_relative 'board.rb'
 				end
 			end
 
-			# if ttt_board == [' ', ' ', opponent]
-
-			if result_array.find { |combo| result_array.count(combo) > 1 } == nil #checks if a match is found
-				move = 9
+			if ttt_board == [' ', ' ', opponent, ' ', marker, ' ', opponent, ' ', ' ']
+				results = 3
+			elsif ttt_board == [opponent, ' ', ' ', ' ', marker, ' ', ' ', ' ', opponent]
+				results = 3
+			elsif result_array.find { |combo| result_array.count(combo) > 1 } == nil #checks if a match is found
+				results = 9
 			else
-				move = result_array.find { |combo| result_array.count(combo) > 1 } #if match is found it takes the move
+				results = result_array.find { |combo| result_array.count(combo) > 1 } #if match is found it takes the move
 			end
-			move
+			results
 	end
 
 
