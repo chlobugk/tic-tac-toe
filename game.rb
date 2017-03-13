@@ -28,10 +28,10 @@ class ConsoleGame
 	    puts "-----------"
 	    puts " #{board.ttt_board[6]} | #{board.ttt_board[7]} | #{board.ttt_board[8]} "
 	    puts "                "
-	    if board.ttt_board.include?(' ')
-	   		 puts "It's #{active_player.marker}'s turn."
+	    if check_winner == true
+	    	puts "GAME OVER"
 	   	else
-	   		puts "GAME OVER"
+	   		puts "It's #{active_player.marker}'s turn."
 	   	end
 	    puts "                "
 	end
