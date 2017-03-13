@@ -206,6 +206,23 @@ require_relative 'board.rb'
 				results
 	end
 
+	def empty_corner(ttt_board)
+
+		if ttt_board[0] == ' '
+			results = 0
+		elsif ttt_board[2] == ' '
+			results = 2
+		elsif ttt_board[6] == ' '
+			results = 6
+		elsif ttt_board[8] == ' '
+			results = 8
+		else 
+			results = 9
+		end
+		results
+	end
+			
+
 
 
 

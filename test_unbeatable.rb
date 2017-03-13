@@ -146,4 +146,22 @@ class TestUnbeatable < MiniTest::Test
 		assert_equal(9, player.opposite_corner(ttt_board))
 	end
 
+	def test_take_corner_2
+		player = Unbeatable_AI.new('o')
+		ttt_board = ['x', ' ', ' ', ' ', 'o', ' ', 'o', ' ', 'x']
+		assert_equal(2, player.empty_corner(ttt_board))
+	end
+
+	def test_take_corner_8
+		player = Unbeatable_AI.new('o')
+		ttt_board = ['x', ' ', 'o', ' ', ' ', ' ', 'x', ' ', ' ']
+		assert_equal(8, player.empty_corner(ttt_board))
+	end
+
+	def test_no_corners
+		player = Unbeatable_AI.new('o')
+		ttt_board = ['x', ' ', 'o', ' ', ' ', ' ', 'o', ' ', 'x']
+		assert_equal(9, player.empty_corner(ttt_board))
+	end
+
 end
