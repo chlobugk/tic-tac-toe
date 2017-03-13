@@ -182,6 +182,33 @@ require_relative 'board.rb'
 	end
 
 
+	def opposite_corner(ttt_board)
+
+		opponent = 'x'
+
+			if marker == 'x'
+				opponent = 'o'
+			else
+				opponent = 'x'
+			end
+
+				if ttt_board[0] == opponent && ttt_board[8] == ' '
+					results = 8
+				elsif ttt_board[2] == opponent && ttt_board[6] == ' '
+					results = 6
+				elsif ttt_board[6] == opponent && ttt_board[2] == ' '
+					results = 2
+				elsif ttt_board[8] == opponent && ttt_board[0] == ' '
+					results = 0
+				else
+					results = 9
+				end
+				results
+	end
+
+
+
+
 
 
 
