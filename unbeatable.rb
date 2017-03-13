@@ -7,6 +7,30 @@ require_relative 'board.rb'
 		@marker = marker
 	end
 
+
+	def fill_move(ttt_board)
+
+		if win(ttt_board) < 9
+			results = win(ttt_board)
+		elsif block(ttt_board) < 9
+			results = block(ttt_board)
+		elsif check_fork(ttt_board) < 9
+			results = check_fork(ttt_board)
+		elsif block_fork(ttt_board) < 9
+			results = block_fork(ttt_board)
+		elsif center(ttt_board) < 9
+			results = center(ttt_board)
+		elsif opposite_corner(ttt_board) < 9
+			results = opposite_corner(ttt_board)
+		elsif empty_corner(ttt_board) < 9
+			results = empty_corner(ttt_board)
+		else empty_side(ttt_board) < 9
+			results = empty_side(ttt_board)
+		end
+		results
+	end
+
+
 	def win(ttt_board)
 		win_array = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]] 
 

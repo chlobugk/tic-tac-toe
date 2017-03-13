@@ -175,4 +175,32 @@ class TestUnbeatable < MiniTest::Test
 		ttt_board = ['x', 'x', 'o', 'x', ' ', 'o', 'o', ' ', 'x']
 		assert_equal(7, player.empty_side(ttt_board))
 	end
+
+	#FINAL FUNCTION BELOW
+
+	def test_take_2
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['x', ' ', ' ', ' ', 'o', ' ', ' ', ' ', ' ']
+		assert_equal(2, player.fill_move(ttt_board))
+	end
+
+	def test_take_4
+		player = Unbeatable_AI.new('o')
+		ttt_board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+		assert_equal(4, player.fill_move(ttt_board))
+	end
+
+	def test_take_8
+		player = Unbeatable_AI.new('o')
+		ttt_board = ['x', ' ', ' ', ' ', 'o', ' ', ' ', ' ', ' ']
+		assert_equal(8, player.fill_move(ttt_board))
+	end
+
+	def test_take_3
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['o', ' ', ' ', ' ', 'x', ' ', ' ', ' ', 'o']
+		assert_equal(3, player.fill_move(ttt_board))
+	end
+
+
 end
