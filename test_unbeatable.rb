@@ -164,4 +164,15 @@ class TestUnbeatable < MiniTest::Test
 		assert_equal(9, player.empty_corner(ttt_board))
 	end
 
+	def test_empty_side_1
+		player = Unbeatable_AI.new('o')
+		ttt_board = ['x', ' ', 'o', 'x', ' ', ' ', 'o', ' ', 'x']
+		assert_equal(1, player.empty_side(ttt_board))
+	end
+
+	def test_empty_side_7
+		player = Unbeatable_AI.new('o')
+		ttt_board = ['x', 'x', 'o', 'x', ' ', 'o', 'o', ' ', 'x']
+		assert_equal(7, player.empty_side(ttt_board))
+	end
 end
