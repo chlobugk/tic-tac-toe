@@ -31,22 +31,22 @@ class ConsoleGame
 	    if board.ttt_board.include?(' ')
 	   		 puts "It's #{active_player.marker}'s turn."
 	   	else
-	   		puts ""
+	   		puts "GAME OVER"
 	   	end
 	    puts "                "
 	end
 
 	def fill_move
-		@position = active_player.fill_move(board.ttt_board)
+		active_player.fill_move(board.ttt_board)
 	end
 
 	def update_position
+		position = fill_move
 		marker = active_player.marker
-		if board.open_position?(@position)
-			board.update_position(@position, marker)
+		if board.open_position?(position)
+			board.update_position(position, marker)
 		else
 			puts "Invalid, please pick again."
-			fill_move
 			update_position
 		end
 	end

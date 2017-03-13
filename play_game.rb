@@ -9,7 +9,6 @@ game.intro
 
 until game.check_tie || game.check_winner 
 game.create_board
-game.fill_move
 game.update_position
 game.change_player
 end
