@@ -12,19 +12,32 @@ require_relative 'board.rb'
 
 		if win(ttt_board) < 9
 			results = win(ttt_board)
-		elsif block(ttt_board) < 9
+
+		elsif 
+			block(ttt_board) < 9
 			results = block(ttt_board)
-		elsif check_fork(ttt_board) < 9
+
+		elsif 
+			check_fork(ttt_board) < 9
 			results = check_fork(ttt_board)
-		elsif block_fork(ttt_board) < 9
+
+		elsif 
+			block_fork(ttt_board) < 9
 			results = block_fork(ttt_board)
-		elsif center(ttt_board) < 9
+
+		elsif 
+			center(ttt_board) < 9
 			results = center(ttt_board)
-		elsif opposite_corner(ttt_board) < 9
+
+		elsif 
+			opposite_corner(ttt_board) < 9
 			results = opposite_corner(ttt_board)
-		elsif empty_corner(ttt_board) < 9
+
+		elsif 
+			empty_corner(ttt_board) < 9
 			results = empty_corner(ttt_board)
-		else empty_side(ttt_board) < 9
+
+		else empty_side(ttt_board)
 			results = empty_side(ttt_board)
 		end
 		results

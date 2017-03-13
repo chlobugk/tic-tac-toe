@@ -202,5 +202,47 @@ class TestUnbeatable < MiniTest::Test
 		assert_equal(3, player.fill_move(ttt_board))
 	end
 
+	def test_take_1
+		player = Unbeatable_AI.new('o')
+		ttt_board = ['x', ' ', 'x', ' ', 'o', ' ', ' ', ' ', ' ']
+		assert_equal(1, player.fill_move(ttt_board))
+	end
+
+	def test_block_final
+		player = Unbeatable_AI.new('x')
+		ttt_board = [' ', 'x', ' ', ' ', 'x', 'o', 'o', ' ', 'o']
+		assert_equal(7, player.fill_move(ttt_board))
+	end
+
+	def test_fork_final
+		player = Unbeatable_AI.new('x')
+		ttt_board = [' ', 'x', ' ', ' ', 'x', 'o', 'o', ' ', 'o']
+		assert_equal(7, player.fill_move(ttt_board))
+	end
+
+	def test_block_fork_final
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['x', 'o', ' ', 'o', ' ', ' ', ' ', ' ', ' ']
+		assert_equal(4, player.fill_move(ttt_board))
+	end
+
+	def test_take_opp_corner_final
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['o', ' ', ' ', ' ', 'x', ' ', ' ', ' ', ' ']
+		assert_equal(8, player.fill_move(ttt_board))
+	end
+
+	def test_take_corner_final
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['x', 'o', 'x', 'o', 'x', ' ', ' ', ' ', ' ']
+		assert_equal(6, player.fill_move(ttt_board))
+	end
+
+	def test_take_side_final
+		player = Unbeatable_AI.new('x')
+		ttt_board = ['x', ' ', 'o', 'o', 'o', 'x', 'x', ' ', 'o']
+		assert_equal(1, player.fill_move(ttt_board))
+	end
+
 
 end
