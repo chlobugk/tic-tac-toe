@@ -56,8 +56,26 @@ get '/' do
 end
 
 post '/players' do
-	session[:opponent] = params[:opponent]
-	board = Board.new
+	session[:board] = Board.new
+	board = session[:board]
+	opponent = params[:opponent]
+
+		if opponent == 'Human'
+			session[:opp] = Human.new('O')
+			erb :board, :locals => {:board => session[:board].fill_move}
+
+		elsif opponent == 'Sequential'
+			session[:opp] = Sequential_AI.new('O')
+
+		elsif opponent == 'Random'
+			session[:opp] = Random_AI.new('O')
+
+		else opponent == 'Unbeatable'
+			session[:opp] = Unbeatable_AI.new('O')
+		end
+
+
+
 	pos0 = "#{board.ttt_board[0]}"
 	pos1 = "#{board.ttt_board[1]}"
 	pos2 = "#{board.ttt_board[2]}"
@@ -84,7 +102,7 @@ post '/board' do
 	position6 = params[:pos6]
 	position7 = params[:pos7]
 	position8 = params[:pos8]
-	
+
 
 
 end
