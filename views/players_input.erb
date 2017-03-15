@@ -1,14 +1,14 @@
-<h1>Welcome to Tic-Tac-Toe!</h1><br>Human = 1<br>Sequential Computer = 2<br>Random Computer = 3<br> Unbeatable Computer = 4<br><br>Please select player X by entering 1-4.
+<h1>Welcome to Tic-Tac-Toe!</h1><br>Please select your opponent.
 
 <p></p>
 
 <form action='players' method='post'>
-<input type="number" name="p1_input" autofocus='autofocus'>
+	<select name= 'opponent'>
+		<option value='Human'>Human</option>
+		<option value='Sequential'>Sequential</option>
+		<option value='Random'>Random</option>
+		<option value='Unbeatable'>Unbeatable</option>
+	</select>
 
-<p></p>
-
-Select player O by entering 1-4.
-<p></p>
-<input type="number" name="p2_input">
-<p><input type='submit'></p> 
+<p><input type='submit' value='submit'></p> 
 

@@ -4,7 +4,7 @@ require_relative 'sequential'
 require_relative 'random'
 require_relative 'unbeatable'
 
-board = Board.new
+enable :sessions
 
 def fill_move
 		active_player.fill_move(board.ttt_board)
@@ -56,8 +56,8 @@ get '/' do
 end
 
 post '/players' do
-	player1 = params[:p1_input].to_i
-	player2 = params[:p2_input].to_i
+	session[:opponent] = params[:opponent]
+	board = Board.new
 	pos0 = "#{board.ttt_board[0]}"
 	pos1 = "#{board.ttt_board[1]}"
 	pos2 = "#{board.ttt_board[2]}"
@@ -68,27 +68,7 @@ post '/players' do
 	pos7 = "#{board.ttt_board[7]}"
 	pos8 = "#{board.ttt_board[8]}"
 
-		if player1 == 1
-			p1 = User.new('x')
-		elsif player1 == 2
-			p1 = Sequential_AI.new('x')
-		elsif player1 == 3
-			p1 = Random_AI.new('x')
-		elsif player1 == 4
-			p1 = Unbeatable_AI.new('x')		
-		end
-
-
-		if player2 == 1
-			p2 = User.new('o')
-		elsif player2 == 2
-			p2 = Sequential_AI.new('o')
-		elsif player2 == 3
-			p2 = Random_AI.new('o')
-		elsif player2 == 4
-			p2 = Unbeatable_AI.new('o')		
-		end
-		erb :board, :locals => {:player1 => player1, :player2 => player2, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
+		erb :board, :locals => {:opponent => session[:opponent], :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
 
 end
 
@@ -104,32 +84,9 @@ post '/board' do
 	position6 = params[:pos6]
 	position7 = params[:pos7]
 	position8 = params[:pos8]
+	
 
 
-
-
-	# game.create_board
-
-		# if backend_p1 == 1
-		# 	p1 = User.new('x')
-		# elsif backend_p1 == 2
-		# 	p1 = Sequential_AI.new('x')
-		# elsif backend_p1 == 3
-		# 	p1 = Random_AI.new('x')
-		# elsif backend_p1 == 4
-		# 	p1 = Unbeatable_AI.new('x')		
-		# end
-
-
-		# if backend_p2 == 1
-		# 	p2 = User.new('o')
-		# elsif backend_p2 == 2
-		# 	p2 = Sequential_AI.new('o')
-		# elsif backend_p2 == 3
-		# 	p2 = Random_AI.new('o')
-		# elsif backend_p2 == 4
-		# 	p2 = Unbeatable_AI.new('o')		
-		# end
 end
 
 
