@@ -7,9 +7,6 @@ require_relative 'unbeatable'
 
 enable :sessions
 
-def fill_move
-		active_player.fill_move(board.ttt_board)
-	end
 
 # def update_position
 # 		position = fill_move
@@ -53,16 +50,18 @@ def fill_move
 
 
 get '/' do 
+	session[:board] = Board.new
 	erb :players_input
 end
 
 post '/players' do
 
+	session[:p1] = User.new('X')
+	session[:active_player] = session[:p1]
 	opponent = params[:opponent]
 
 		if opponent == 'Human'
 			session[:opp] = User.new('O')
-			# erb :board, :locals => {:board => board.fill_move}
 
 		elsif opponent == 'Sequential'
 			session[:opp] = Sequential_AI.new('O')
@@ -74,24 +73,16 @@ post '/players' do
 			session[:opp] = Unbeatable_AI.new('O')
 		end
 
-		redirect 'board?'
+		redirect '/board'
 
-	# pos0 = "#{board.ttt_board[0]}"
-	# pos1 = "#{board.ttt_board[1]}"
-	# pos2 = "#{board.ttt_board[2]}"
-	# pos3 = "#{board.ttt_board[3]}"
-	# pos4 = "#{board.ttt_board[4]}"
-	# pos5 = "#{board.ttt_board[5]}"
-	# pos6 = "#{board.ttt_board[6]}"
-	# pos7 = "#{board.ttt_board[7]}"
-	# pos8 = "#{board.ttt_board[8]}"
-
-	# 	erb :board, :locals => {:opponent => opponent, :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
 
 end
 
 get '/board' do
-	board = Board.new
+
+	move = session[:active_player].fill_move(session[:board].ttt_board)
+	opponent = session[:opp]
+	board = session[:board]
 
 	pos0 = "#{board.ttt_board[0]}"
 	pos1 = "#{board.ttt_board[1]}"
@@ -103,9 +94,27 @@ get '/board' do
 	pos7 = "#{board.ttt_board[7]}"
 	pos8 = "#{board.ttt_board[8]}"
 
-	opponent = session[:opp]
+		if move == 'human'
+			erb :human_move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
 
-	# redirect '/players?opponent=' + opponent + ''
+		else session[:board].valid_input?(move)
+			redirect '/move'
+
+		end
+
+
+
+		erb :board, :locals => {:opponent => opponent, :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
+
+
+
+end
+
+
+
+
+
+# redirect '/players?opponent=' + opponent + ''
 	# backend_p1 = params[:p1]
 	# backend_p2 = params[:p2]
 	# position0 = params[:pos0]
@@ -117,14 +126,6 @@ get '/board' do
 	# position6 = params[:pos6]
 	# position7 = params[:pos7]
 	# position8 = params[:pos8]
-
-		erb :board, :locals => {:opponent => opponent, :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
-
-
-
-end
-
-
 
 
 

@@ -11,6 +11,18 @@ class Board
 		ttt_board[position] = marker
 	end
 
+	def update_board()
+		board = []
+		ttt_board.each_with_index do |value, index|
+			if value == 'X' || value == 'O'
+				board << value
+			else
+				board << (index + 1)
+			end
+		end
+		board
+	end
+
 
 	def open_position?(position)
 		if ttt_board[position] == ' '
