@@ -1,5 +1,6 @@
 require 'sinatra'
 require_relative 'board'
+require_relative 'user'
 require_relative 'sequential'
 require_relative 'random'
 require_relative 'unbeatable'
@@ -56,13 +57,12 @@ get '/' do
 end
 
 post '/players' do
-	session[:board] = Board.new
-	board = session[:board]
+
 	opponent = params[:opponent]
 
 		if opponent == 'Human'
-			session[:opp] = Human.new('O')
-			erb :board, :locals => {:board => session[:board].fill_move}
+			session[:opp] = User.new('O')
+			# erb :board, :locals => {:board => board.fill_move}
 
 		elsif opponent == 'Sequential'
 			session[:opp] = Sequential_AI.new('O')
@@ -74,7 +74,24 @@ post '/players' do
 			session[:opp] = Unbeatable_AI.new('O')
 		end
 
+		redirect 'board?'
 
+	# pos0 = "#{board.ttt_board[0]}"
+	# pos1 = "#{board.ttt_board[1]}"
+	# pos2 = "#{board.ttt_board[2]}"
+	# pos3 = "#{board.ttt_board[3]}"
+	# pos4 = "#{board.ttt_board[4]}"
+	# pos5 = "#{board.ttt_board[5]}"
+	# pos6 = "#{board.ttt_board[6]}"
+	# pos7 = "#{board.ttt_board[7]}"
+	# pos8 = "#{board.ttt_board[8]}"
+
+	# 	erb :board, :locals => {:opponent => opponent, :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
+
+end
+
+get '/board' do
+	board = Board.new
 
 	pos0 = "#{board.ttt_board[0]}"
 	pos1 = "#{board.ttt_board[1]}"
@@ -86,22 +103,22 @@ post '/players' do
 	pos7 = "#{board.ttt_board[7]}"
 	pos8 = "#{board.ttt_board[8]}"
 
-		erb :board, :locals => {:opponent => session[:opponent], :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
+	opponent = session[:opp]
 
-end
+	# redirect '/players?opponent=' + opponent + ''
+	# backend_p1 = params[:p1]
+	# backend_p2 = params[:p2]
+	# position0 = params[:pos0]
+	# position1 = params[:pos1]
+	# position2 = params[:pos2]
+	# position3 = params[:pos3]
+	# position4 = params[:pos4]
+	# position5 = params[:pos5]
+	# position6 = params[:pos6]
+	# position7 = params[:pos7]
+	# position8 = params[:pos8]
 
-post '/board' do
-	backend_p1 = params[:p1]
-	backend_p2 = params[:p2]
-	position0 = params[:pos0]
-	position1 = params[:pos1]
-	position2 = params[:pos2]
-	position3 = params[:pos3]
-	position4 = params[:pos4]
-	position5 = params[:pos5]
-	position6 = params[:pos6]
-	position7 = params[:pos7]
-	position8 = params[:pos8]
+		erb :board, :locals => {:opponent => opponent, :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
 
 
 
