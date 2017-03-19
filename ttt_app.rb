@@ -95,7 +95,7 @@ get '/board' do
 	pos8 = "#{board.ttt_board[8]}"
 
 		if move == 'human'
-			erb :human_move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
+			erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
 
 		else session[:board].valid_input?(move)
 			redirect '/move'
@@ -106,9 +106,20 @@ get '/board' do
 
 		erb :board, :locals => {:opponent => opponent, :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
 
-
-
 end
+
+
+post '/move' do
+	square = params[:move].to_i
+
+	session[:board].update_board((move - 1))
+
+	erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
+end
+
+
+
+
 
 
 
