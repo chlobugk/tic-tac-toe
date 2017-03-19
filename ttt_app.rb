@@ -110,13 +110,18 @@ end
 
 
 get '/move' do
-	move = session[:active_player].fill_move(session[:board].ttt_board)
+	move = session[:active_player].fill_move(session[:board])
 	# square = params[:move].to_i
 
 	redirect '/board'
 end
 
+post '/move' do
+	move = params[:square].to_i
 
+	session[:board].update_position(square, session[:active_player].marker)
+
+end
 
 
 
