@@ -1,13 +1,21 @@
 <center><h1>Tic Tac Toe</h1> <p>
 	   
-<form action ='board' method='post'>
+<form action ='board' method='get'>
 	<input type='text' name='opponent' value= session[:opponent] hidden>
 
-	<h2><input type="submit" name='square' value= <%=pos0%>> | <input type="submit" name='square' value= <%=pos1%>> | <input type="submit" name='square' value= <%=pos2%>><br>
+	<h2>
+	<input type="submit" name='square' value= <%=board.ttt_board[0]%>> | 
+	<input type="submit" name='square' value= <%=board.ttt_board[1]%>> | 
+	<input type="submit" name='square' value= <%=board.ttt_board[2]%>><br>
 	-------------- <br>
-	<input type="submit" name='square' value= <%=pos3%>> | <input type="submit" name='square' value= <%=pos4%>> | <input type="submit" name='square' value= <%=pos5%>> <br>
+	<input type="submit" name='square' value= <%=board.ttt_board[3]%>> | 
+	<input type="submit" name='square' value= <%=board.ttt_board[4]%>> | 
+	<input type="submit" name='square' value= <%=board.ttt_board[5]%>><br>
 	-------------- <br>
-	<input type="submit" name='square' value= <%=pos6%>> | <input type="submit" name='square' value= <%=pos7%>> | <input type="submit" name='square' value= <%=pos8%>></h2><br> 
+	<input type="submit" name='square' value= <%=board.ttt_board[6]%>> | 
+	<input type="submit" name='square' value= <%=board.ttt_board[7]%>> | 
+	<input type="submit" name='square' value= <%=board.ttt_board[8]%>><br> 
+	</h2>
 	
 </form>
 </center>

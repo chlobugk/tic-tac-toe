@@ -12,6 +12,6 @@ class User
 	# end
 
 	def fill_move(board)
-		"human"
+		"fill_human"
 	end
 end

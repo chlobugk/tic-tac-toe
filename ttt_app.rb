@@ -62,6 +62,7 @@ post '/players' do
 
 		if opponent == 'Human'
 			session[:opp] = User.new('O')
+			human = 'fill_human'
 
 		elsif opponent == 'Sequential'
 			session[:opp] = Sequential_AI.new('O')
@@ -73,48 +74,46 @@ post '/players' do
 			session[:opp] = Unbeatable_AI.new('O')
 		end
 
-		redirect '/board'
+		if human == 'fill_human'
+			# erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
+			redirect '/board'
 
+		else session[:board].valid_input?(move)
+			redirect '/move'
+		end
 
 end
 
 get '/board' do
 
-	move = session[:active_player].fill_move(session[:board].ttt_board)
-	opponent = session[:opp]
-	board = session[:board]
-
-	pos0 = "#{board.ttt_board[0]}"
-	pos1 = "#{board.ttt_board[1]}"
-	pos2 = "#{board.ttt_board[2]}"
-	pos3 = "#{board.ttt_board[3]}"
-	pos4 = "#{board.ttt_board[4]}"
-	pos5 = "#{board.ttt_board[5]}"
-	pos6 = "#{board.ttt_board[6]}"
-	pos7 = "#{board.ttt_board[7]}"
-	pos8 = "#{board.ttt_board[8]}"
-
-		if move == 'human'
-			erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
-
-		else session[:board].valid_input?(move)
-			redirect '/move'
-
-		end
-
-
-
-		erb :board, :locals => {:opponent => opponent, :board => board, :pos0 => pos0, :pos1 => pos1, :pos2 => pos2, :pos3 => pos3, :pos4 => pos4, :pos5 => pos5, :pos6 => pos6, :pos7 => pos7, :pos8 => pos8}
-
+	erb :board, :locals => {:board => session[:board], :p1 => session[:p1], :opponent => session[:opp], :active_player => session[:active_player]}
+	# move = session[:active_player].fill_move(session[:board].ttt_board)
 end
 
+		
+	# array = ["#{board.ttt_board[0]}", "#{board.ttt_board[1]}", "#{board.ttt_board[2]}", "#{board.ttt_board[3]}", "#{board.ttt_board[4]}", "#{board.ttt_board[5]}", "#{board.ttt_board[6]}", "#{board.ttt_board[7]}", "#{board.ttt_board[8]}"]
+	# array.each do |square|
 
-post '/move' do
-	square = params[:move].to_i
+	# pos0 = "#{board.ttt_board[0]}"
+	# pos1 = "#{board.ttt_board[1]}"
+	# pos2 = "#{board.ttt_board[2]}"
+	# pos3 = "#{board.ttt_board[3]}"
+	# pos4 = "#{board.ttt_board[4]}"
+	# pos5 = "#{board.ttt_board[5]}"
+	# pos6 = "#{board.ttt_board[6]}"
+	# pos7 = "#{board.ttt_board[7]}"
+	# pos8 = "#{board.ttt_board[8]}"
 
-	session[:board].update_board((move - 1))
+# :pos0 => "#{board.ttt_board[0]}", :pos1 => "#{board.ttt_board[1]}", :pos2 => "#{board.ttt_board[2]}", :pos3 => "#{board.ttt_board[3]}", :pos4 => "#{board.ttt_board[4]}", :pos5 => "#{board.ttt_board[5]}", :pos6 => "#{board.ttt_board[6]}", :pos7 => "#{board.ttt_board[7]}", :pos8 => "#{board.ttt_board[8]}"
 
-	erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
+
+
+
+get '/move' do
+	move = session[:active_player].fill_move(session[:board].ttt_board)
+	# square = params[:move].to_i
+
+	redirect '/board'
 end
 
 
