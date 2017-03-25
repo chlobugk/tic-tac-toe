@@ -1,4 +1,4 @@
-class Board
+		class Board
 
 	attr_accessor :ttt_board
 
@@ -11,17 +11,17 @@ class Board
 		ttt_board[position] = marker
 	end
 
-	def update_board()
-		board = []
-		ttt_board.each_with_index do |value, index|
-			if value == 'X' || value == 'O'
-				board << value
-			else
-				board << (index + 1)
-			end
-		end
-		board
-	end
+	# def update_board(pos)
+		
+	# 	ttt_board.each_with_index do |value, index|
+	# 		if value == 'X' || value == 'O'
+	# 			board << value
+	# 		else
+	# 			board << (index + 1)
+	# 		end
+	# 	end
+	# 	board
+	# end
 
 
 	def open_position?(position)
@@ -35,7 +35,7 @@ class Board
 
 	def valid_input?(input)
 
-		if input.match(/[XxOo]/)
+		if input.match(/[XxOo]/) && input.length == 1
 			true
 		else
 			false

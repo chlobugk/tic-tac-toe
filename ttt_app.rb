@@ -8,51 +8,11 @@ require_relative 'unbeatable'
 enable :sessions
 
 
-# def update_position
-# 		position = fill_move
-# 		marker = active_player.marker
-# 		if board.open_position?(position)
-# 			board.update_position(position, marker)
-# 		else
-# 			puts "Invalid, please pick again."
-# 			update_position
-# 		end
-# 	end
-
-# 	def change_player
-# 		if active_player == p1
-# 			@active_player = p2
-# 		else 
-# 			@active_player = p1
-# 		end
-# 	end
-
-# 	def check_winner
-# 		if board.winner?(p1.marker)
-# 			true
-# 		elsif board.winner?(p2.marker)
-# 			true
-# 		elsif
-# 			false
-# 		end
-# 	end
-
-# 	def check_tie
-# 		if board.full_board?
-# 			true
-# 		else
-# 			false
-# 		end
-# 	end
-
-
-
-
-
 get '/' do 
 	session[:board] = Board.new
 	erb :players_input
 end
+
 
 post '/players' do
 
@@ -78,11 +38,11 @@ post '/players' do
 			# erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
 			redirect '/board'
 
-		else session[:board].valid_input?(move)
+		else 
 			redirect '/move'
 		end
-
 end
+
 
 get '/board' do
 
@@ -90,31 +50,25 @@ get '/board' do
 	# move = session[:active_player].fill_move(session[:board].ttt_board)
 end
 
-		
-	# array = ["#{board.ttt_board[0]}", "#{board.ttt_board[1]}", "#{board.ttt_board[2]}", "#{board.ttt_board[3]}", "#{board.ttt_board[4]}", "#{board.ttt_board[5]}", "#{board.ttt_board[6]}", "#{board.ttt_board[7]}", "#{board.ttt_board[8]}"]
-	# array.each do |square|
-
-	# pos0 = "#{board.ttt_board[0]}"
-	# pos1 = "#{board.ttt_board[1]}"
-	# pos2 = "#{board.ttt_board[2]}"
-	# pos3 = "#{board.ttt_board[3]}"
-	# pos4 = "#{board.ttt_board[4]}"
-	# pos5 = "#{board.ttt_board[5]}"
-	# pos6 = "#{board.ttt_board[6]}"
-	# pos7 = "#{board.ttt_board[7]}"
-	# pos8 = "#{board.ttt_board[8]}"
-
-# :pos0 => "#{board.ttt_board[0]}", :pos1 => "#{board.ttt_board[1]}", :pos2 => "#{board.ttt_board[2]}", :pos3 => "#{board.ttt_board[3]}", :pos4 => "#{board.ttt_board[4]}", :pos5 => "#{board.ttt_board[5]}", :pos6 => "#{board.ttt_board[6]}", :pos7 => "#{board.ttt_board[7]}", :pos8 => "#{board.ttt_board[8]}"
-
-
-
 
 get '/move' do
-	move = session[:active_player].fill_move(session[:board])
-	# square = params[:move].to_i
+	move = session[:active_player].fill_move(session[:board].ttt_board)
+	session[:board].update_position((move.to_i), session[:active_player].marker)
+	
+		if session[:board].winner?(session[:active_player].marker)
+			erb :win
+		elsif session[:board].full_board?
+			erb :tie
+		else
+			if session[:active_player] == session[:p1]
+				session[:active_player] = session[:opp]
+			else
+				session[:active_player] = session[:p1]
+			end
+		end
 
-	redirect '/board'
 end
+
 
 post '/move' do
 	move = params[:square].to_i
