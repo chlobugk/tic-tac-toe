@@ -22,7 +22,7 @@ post '/players' do
 
 		if opponent == 'Human'
 			session[:opp] = User.new('O')
-			human = 'fill_human'
+			session[:human] = 'fill_human'
 
 		elsif opponent == 'Sequential'
 			session[:opp] = Sequential_AI.new('O')
@@ -34,7 +34,7 @@ post '/players' do
 			session[:opp] = Unbeatable_AI.new('O')
 		end
 
-		if human == 'fill_human'
+		if session[:human] == 'fill_human'
 			# erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
 			redirect '/board'
 
@@ -65,6 +65,12 @@ get '/move' do
 			else
 				session[:active_player] = session[:p1]
 			end
+
+			if session[:active_player] == session[:p1] || session[:active_player] == session[:opp] && session[:human] == 'fill_human'
+				redirect '/board'
+			else
+				redirect '/move'
+			end
 		end
 
 end
@@ -72,9 +78,31 @@ end
 
 post '/move' do
 	move = params[:square].to_i
+	move -= 1
 
-	session[:board].update_position(square, session[:active_player].marker)
+	if session[:board].valid_position?(move)
+		session[:board].update_position(square, session[:active_player].marker)
 
+		if session[:board].winner?(session[:active_player].marker)
+			erb :win
+		elsif session[:board].full_board?
+			erb :tie
+		else
+			if session[:active_player] == session[:p1]
+				session[:active_player] = session[:opp]
+			else
+				session[:active_player] = session[:p1]
+			end
+
+			if session[:active_player] == session[:p1] || session[:active_player] == session[:opp] && session[:human] == 'fill_human'
+				redirect '/board'
+			else
+				redirect '/move'
+			end
+		end
+	else
+		redirect '/board'
+	end
 end
 
 
