@@ -53,57 +53,54 @@ end
 
 get '/move' do
 	move = session[:active_player].fill_move(session[:board].ttt_board)
-	session[:board].update_position((move.to_i), session[:active_player].marker)
+	session[:board].update_position((move), session[:active_player].marker)
 	
-		if session[:board].winner?(session[:active_player].marker)
-			erb :win
-		elsif session[:board].full_board?
-			erb :tie
-		else
-			if session[:active_player] == session[:p1]
-				session[:active_player] = session[:opp]
-			else
-				session[:active_player] = session[:p1]
-			end
-
-			if session[:active_player] == session[:p1] || session[:active_player] == session[:opp] && session[:human] == 'fill_human'
-				redirect '/board'
-			else
-				redirect '/move'
-			end
-		end
-
+		redirect '/check_game'
 end
 
 
-post '/move' do
+post '/user_move' do
 	move = params[:square].to_i
 	move -= 1
 
-	if session[:board].valid_position?(move)
-		session[:board].update_position(square, session[:active_player].marker)
-
-		if session[:board].winner?(session[:active_player].marker)
-			erb :win
-		elsif session[:board].full_board?
-			erb :tie
-		else
-			if session[:active_player] == session[:p1]
-				session[:active_player] = session[:opp]
-			else
-				session[:active_player] = session[:p1]
-			end
-
-			if session[:active_player] == session[:p1] || session[:active_player] == session[:opp] && session[:human] == 'fill_human'
-				redirect '/board'
-			else
-				redirect '/move'
-			end
-		end
+	if session[:board].open_position?(move)
+		session[:board].update_position(move, session[:active_player].marker)
+		redirect '/check_game'
 	else
 		redirect '/board'
 	end
 end
+
+
+
+get '/check_game' do
+
+	if session[:board].winner?(session[:active_player].marker)
+		erb :win
+	elsif session[:board].full_board?
+		erb :tie
+	else
+		redirect '/change_player'
+	end
+end
+
+
+
+get '/change_player' do
+
+	if session[:active_player] == session[:p1]
+		session[:active_player] = session[:opp]
+	else
+		session[:active_player] = session[:p1]
+	end
+
+	if session[:active_player] == session[:p1] || session[:active_player] == session[:opp] && session[:human] == 'fill_human'
+		redirect '/board'
+	else
+		redirect '/move'
+	end
+end
+
 
 
 
