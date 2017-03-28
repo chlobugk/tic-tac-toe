@@ -1,9 +1,9 @@
-		class Board
+class Board
 
 	attr_accessor :ttt_board
 
 	def initialize
-		@ttt_board = Array.new(9, ' ')
+		@ttt_board = *(1..9)
 	end
 
 
@@ -11,9 +11,21 @@
 		ttt_board[position] = marker
 	end
 
+	def board_pos()
+		array_board = []
+		ttt_board.each_with_index do |value, index|
+			if value == 'X' || value == 'O'
+				array_board << value
+			else
+				array_board << (index + 1)
+			end
+		end
+		array_board
+	end
+
 
 	def open_position?(position)
-		if ttt_board[position] == ' '
+		if ttt_board[position] != 'X' && ttt_board[position] != 'O' && position.between?(0,8)
 			true
 		else
 			false 
@@ -32,12 +44,12 @@
 
 
 	def full_board?()
-
-		if ttt_board.include?(' ')
-			false
-		else
+		if ttt_board.all? { |x| x.is_a?(String) }
 			true
+		else
+			false
 		end
+
 	end
 
 
@@ -68,52 +80,3 @@
 
 	
 end
-
-
-
-# class Player
-
-# 	attr_accessor :name, :marker
-
-# 	def initialize
-# 		print 'Enter your name here: '
-# 		@name = gets.chomp
-
-# 		print 'Enter X or O to choose your marker: '
-# 		@marker = gets.chomp
-# 	end
-
-
-# end
-
-
-# class Game
-
-
-# 	def final_game(marker)
-		
-# 		final = open_position?(marker)
-# 		valid_input?(final)
-
-# 			if winner?(final) == true
-# 				print @name + ' wins!'
-# 			else 
-# 				print 'Tie game!'
-# 			end
-# 	end
-
-# end
-
-
-
-
-
-	 
-
-
-
-
-
-
-
-
