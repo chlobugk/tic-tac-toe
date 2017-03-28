@@ -1,14 +1,19 @@
 class Sequential_AI
 
-	attr_reader :marker
+	attr_accessor :marker
 
 	def initialize(marker)
 		@marker = marker
 	end
 
+
 	def fill_move(board)
-		board.index(' ')
+		board.index { |x| x.is_a?(Integer) }
 	end
+
+	# def fill_move(board)
+	# 	board.index(' ')
+	# end
 end
 
 # def fill_seq(comp)

@@ -1,14 +1,16 @@
 require 'sinatra'
-require_relative 'board_for_app.rb'
-require_relative 'user.rb'
-require_relative 'sequential.rb'
-require_relative 'random.rb'
-require_relative 'unbeatable.rb'
+require_relative 'redo_board'
+require_relative 'user'
+require_relative 'sequential'
+require_relative 'random'
+require_relative 'unbeatable'
 
 enable :sessions
 
 
 get '/' do 
+	session[:human] = nil
+	session[:board] = nil
 	session[:board] = Board.new
 	erb :players_input
 end
@@ -22,6 +24,7 @@ post '/players' do
 
 		if opponent == 'Human'
 			session[:opp] = User.new('O')
+			session[:human] = 'fill_human'
 
 		elsif opponent == 'Sequential'
 			session[:opp] = Sequential_AI.new('O')
@@ -33,12 +36,11 @@ post '/players' do
 			session[:opp] = Unbeatable_AI.new('O')
 		end
 
-		# if move == 'fill_human'
-		# 	redirect '/board'
-		# else
-		# 	redirect '/move'
-		# end
-		redirect '/board'
+		if session[:human] == 'fill_human'
+			redirect '/board'
+		else
+			redirect '/move'
+		end
 end
 
 
@@ -52,7 +54,7 @@ end
 get '/move' do
 	move = session[:active_player].fill_move(session[:board].ttt_board)
 	# session[:board].update_position((move), session[:active_player].marker)
-	session[:board].update_position((move), session[:active_player].marker)
+	session[:board].update_position(move.to_i, session[:active_player].marker)
 
 	redirect '/check_game'
 end
@@ -93,7 +95,7 @@ get '/change_player' do
 		session[:active_player] = session[:p1]
 	end
 
-	if session[:active_player] == session[:p1] || session[:active_player] == session[:opp] && session[:human] == 'fill_human'
+	if session[:active_player] == session[:p1] || (session[:active_player] == session[:opp] && session[:human] == 'fill_human')
 		redirect '/board'
 	else
 		redirect '/move'
