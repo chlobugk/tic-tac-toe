@@ -11,39 +11,39 @@ require_relative 'board.rb'
 	def fill_move(ttt_board)
 
 		if win(ttt_board) < 9
-			results = win(ttt_board)
+			move = win(ttt_board)
 
 		elsif 
 			block(ttt_board) < 9
-			results = block(ttt_board)
+			move = block(ttt_board)
 
 		elsif 
 			check_fork(ttt_board) < 9
-			results = check_fork(ttt_board)
+			move = check_fork(ttt_board)
 
 		elsif 
 			block_fork(ttt_board) < 9
-			results = block_fork(ttt_board)
+			move = block_fork(ttt_board)
 
 		elsif 
 			center(ttt_board) < 9
-			results = center(ttt_board)
+			move = center(ttt_board)
 
 		elsif 
 			opposite_corner(ttt_board) < 9
-			results = opposite_corner(ttt_board)
+			move = opposite_corner(ttt_board)
 
 		elsif 
 			empty_corner(ttt_board) < 9
-			results = empty_corner(ttt_board)
+			move = empty_corner(ttt_board)
 
 		elsif 
-		 	 empty_side(ttt_board) < 9
-			results = empty_side(ttt_board)
+		 	empty_side(ttt_board) < 9
+			move = empty_side(ttt_board)
 		else
-			results = ttt_board.index = (' ')
+			move = ttt_board.index = (' ')
 		end
-		results
+		move
 	end
 
 

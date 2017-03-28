@@ -9,7 +9,7 @@ enable :sessions
 
 
 get '/' do 
-	session[:board] = Board.new
+	session[:board] = Board.new([' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '])
 	erb :players_input
 end
 
@@ -22,7 +22,6 @@ post '/players' do
 
 		if opponent == 'Human'
 			session[:opp] = User.new('O')
-			session[:human] = 'fill_human'
 
 		elsif opponent == 'Sequential'
 			session[:opp] = Sequential_AI.new('O')
@@ -34,38 +33,39 @@ post '/players' do
 			session[:opp] = Unbeatable_AI.new('O')
 		end
 
-		if session[:human] == 'fill_human'
-			# erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
-			redirect '/board'
-
-		else 
-			redirect '/move'
-		end
+		redirect '/move'
 end
 
 
 get '/board' do
 
-	erb :board, :locals => {:board => session[:board], :p1 => session[:p1], :opponent => session[:opp], :active_player => session[:active_player]}
+	erb :board, :locals => {:board => session[:board].board_pos, :p1 => session[:p1], :opponent => session[:opp], :active_player => session[:active_player]}
 	# move = session[:active_player].fill_move(session[:board].ttt_board)
 end
 
 
 get '/move' do
 	move = session[:active_player].fill_move(session[:board].ttt_board)
-	session[:board].update_position((move), session[:active_player].marker)
-	
-		redirect '/check_game'
+	# session[:board].update_position((move), session[:active_player].marker)
+		if move == 'fill_human'
+			# erb :move, :locals => {:active_player => session[:active_player], :board => session[:board].update_board}
+			redirect '/board'
+
+		elsif 
+			session[:board].open_position?(move)
+			redirect '/check_game?move=' + move.to_s
+		else
+			redirect '/move'
+		end
+
 end
 
 
 post '/user_move' do
 	move = params[:square].to_i
-	move -= 1
 
 	if session[:board].open_position?(move)
-		session[:board].update_position(move, session[:active_player].marker)
-		redirect '/check_game'
+		redirect '/check_game?move=' + move.to_s
 	else
 		redirect '/board'
 	end
@@ -74,6 +74,9 @@ end
 
 
 get '/check_game' do
+	move_pos = params[:move].to_i
+
+	session[:board].update_position((move_pos - 1), session[:active_player].marker)
 
 	if session[:board].winner?(session[:active_player].marker)
 		erb :win

@@ -2,8 +2,9 @@
 
 	attr_accessor :ttt_board
 
-	def initialize 
-		@ttt_board = Array.new(9, ' ')
+	def initialize(board)
+		# @ttt_board = Array.new(9, ' ')
+		@ttt_board = board
 	end
 
 
@@ -11,17 +12,17 @@
 		ttt_board[position] = marker
 	end
 
-	# def update_board(pos)
-		
-	# 	ttt_board.each_with_index do |value, index|
-	# 		if value == 'X' || value == 'O'
-	# 			board << value
-	# 		else
-	# 			board << (index + 1)
-	# 		end
-	# 	end
-	# 	board
-	# end
+	def board_pos()
+		array_board = []
+		ttt_board.each_with_index do |value, index|
+			if value == 'X' || value == 'O'
+				array_board << value
+			else
+				array_board << (index + 1)
+			end
+		end
+		array_board
+	end
 
 
 	def open_position?(position)
