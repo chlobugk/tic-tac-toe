@@ -8,21 +8,33 @@ class Players
 end
 
 
-class User < Players
+class User_App < Players
 	attr_accessor :marker
 end
 
 
-class Sequential_AI
+class Sequential_App < Players
 	attr_accessor :marker
 	def fill_move(board)
 		board.index { |x| x.is_a?(Integer) }
 	end
 end
 
-# class Random_AI
-# 	attr_accessor :marker
-	
+class Random_App < Players
+	attr_accessor :marker
+	def fill_move(board)
+	options = []
+
+		board.each_with_index do |val, pos|
+			if val.is_a?(Integer)
+				options << pos
+			end
+		end
+		options.sample
+	end
+end
+
+
 
 
 

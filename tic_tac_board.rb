@@ -1,4 +1,4 @@
-class Board
+class Board_App
 
 	attr_accessor :ttt_board
 

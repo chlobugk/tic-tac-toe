@@ -1,7 +1,6 @@
 require 'sinatra'
-require_relative 'board'
-require_relative 'user'
-require_relative 'sequential'
+require_relative 'tic_tac_board.rb'
+require_relative 'player_classes'
 require_relative 'random'
 require_relative 'unbeatable'
 
@@ -10,30 +9,30 @@ enable :sessions
 
 get '/' do 
 	session[:board] = nil
-	session[:board] = Board.new
+	session[:board] = Board_App.new
 	erb :players_input
 end
 
 
 post '/players' do
 
-	session[:p1] = User.new('X')
+	session[:p1] = User_App.new('X')
 	session[:active_player] = session[:p1]
 	opponent = params[:opponent]
 	session[:human] = nil
 
 		if opponent == 'Human'
-			session[:opp] = User.new('O')
+			session[:opp] = User_App.new('O')
 			session[:human] = 'fill_human'
 
 		elsif opponent == 'Sequential'
-			session[:opp] = Sequential_AI.new('O')
+			session[:opp] = Sequential_App.new('O')
 
 		elsif opponent == 'Random'
-			session[:opp] = Random_AI.new('O')
+			session[:opp] = Random_App.new('O')
 
 		else opponent == 'Unbeatable'
-			session[:opp] = Unbeatable_AI.new('O')
+			session[:opp] = Unbeatable_App.new('O')
 		end
 
 		redirect '/board'
@@ -50,7 +49,7 @@ end
 get '/move' do
 	move = session[:active_player].fill_move(session[:board].ttt_board)
 	# session[:board].update_position((move), session[:active_player].marker)
-	session[:board].update_position(move.to_i, session[:active_player].marker)
+	session[:board].update_position(move, session[:active_player].marker)
 
 	redirect '/check_game'
 end
