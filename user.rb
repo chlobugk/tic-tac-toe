@@ -6,12 +6,9 @@ class User
 		@marker = marker
 	end
 
-	# def fill_move(board)
-	# 	print 'Choose 0-8 to pick your square: '
-	# 	position = gets.chomp.to_i
-	# end
-
 	def fill_move(board)
-		"fill_human"
+		print 'Choose 0-8 to pick your square: '
+		position = gets.chomp.to_i
 	end
+
 end

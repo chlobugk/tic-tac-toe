@@ -1,4 +1,4 @@
-class Sequential_AI
+class Sequential_AI 
 
 	attr_accessor :marker
 
@@ -6,14 +6,9 @@ class Sequential_AI
 		@marker = marker
 	end
 
-
 	def fill_move(board)
-		board.index { |x| x.is_a?(Integer) }
+		board.index(' ')
 	end
-
-	# def fill_move(board)
-	# 	board.index(' ')
-	# end
 end
 
 # def fill_seq(comp)
