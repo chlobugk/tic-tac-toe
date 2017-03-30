@@ -1,8 +1,6 @@
 require 'sinatra'
 require_relative 'tic_tac_board.rb'
 require_relative 'player_classes'
-require_relative 'random'
-require_relative 'unbeatable'
 
 enable :sessions
 

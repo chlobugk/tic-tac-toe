@@ -1,5 +1,5 @@
-class Unbeatable_AI
-require_relative 'board.rb'
+class Unbeatable_App
+require_relative 'tic_tac_board.rb'
 
 	attr_reader :marker
 
@@ -10,34 +10,34 @@ require_relative 'board.rb'
 
 	def fill_move(ttt_board)
 
-		if win(ttt_board) < 9
+		if win(ttt_board) < 10
 			move = win(ttt_board)
 
 		elsif 
-			block(ttt_board) < 9
+			block(ttt_board) < 10
 			move = block(ttt_board)
 
 		elsif 
-			check_fork(ttt_board) < 9
+			check_fork(ttt_board) < 10
 			move = check_fork(ttt_board)
 
 		elsif 
-			block_fork(ttt_board) < 9
+			block_fork(ttt_board) < 10
 			move = block_fork(ttt_board)
 
 		elsif 
-			center(ttt_board) < 9
+			center(ttt_board) < 10
 			move = center(ttt_board)
 
 		elsif 
-			opposite_corner(ttt_board) < 9
+			opposite_corner(ttt_board) < 10
 			move = opposite_corner(ttt_board)
 
 		elsif 
-			empty_corner(ttt_board) < 9
+			empty_corner(ttt_board) < 10
 			move = empty_corner(ttt_board)
 
-		else empty_side(ttt_board) < 9
+		else empty_side(ttt_board) < 10
 			move = empty_side(ttt_board)
 		end
 		move
@@ -58,7 +58,7 @@ require_relative 'board.rb'
 				[ttt_board[2], ttt_board[4], ttt_board[6]]
 						]
 	
-			results = 9
+			results = 10
 			board_pos.each_with_index do |win_combo, index|
 
 				if win_combo.count(marker) == 2 && win_combo.count(' ') == 1
@@ -94,7 +94,7 @@ require_relative 'board.rb'
 				opponent = 'x'
 			end
 
-			results = 9
+			results = 10
 			board_pos.each_with_index do |win_combo, index|
 
 				if win_combo.count(opponent) == 2 && win_combo.count(' ') == 1
@@ -144,7 +144,7 @@ require_relative 'board.rb'
 			end
 
 			if result_array.find { |combo| result_array.count(combo) > 1 } == nil #checks if a match is found
-				results = 9
+				results = 10
 			else
 				results = result_array.find { |combo| result_array.count(combo) > 1 } #if match is found it takes the move
 			end
@@ -200,7 +200,7 @@ require_relative 'board.rb'
 			elsif ttt_board == [opponent, ' ', ' ', ' ', marker, ' ', ' ', ' ', opponent]
 				results = 3
 			elsif result_array.find { |combo| result_array.count(combo) > 1 } == nil #checks if a match is found
-				results = 9
+				results = 10
 			else
 				results = result_array.find { |combo| result_array.count(combo) > 1 } #if match is found it takes the move
 			end
@@ -213,7 +213,7 @@ require_relative 'board.rb'
 		if ttt_board[4] == ' '
 			results = 4
 		else
-			results = 9
+			results = 10
 		end
 		results
 	end
@@ -221,24 +221,24 @@ require_relative 'board.rb'
 
 	def opposite_corner(ttt_board)
 
-		opponent = 'x'
+		opponent = 'X'
 
-			if marker == 'x'
-				opponent = 'o'
+			if marker == 'X'
+				opponent = 'O'
 			else
-				opponent = 'x'
+				opponent = 'X'
 			end
 
-				if ttt_board[0] == opponent && ttt_board[8] == ' '
+				if ttt_board[0] == opponent && ttt_board[8].is_a?(Integer)
 					results = 8
-				elsif ttt_board[2] == opponent && ttt_board[6] == ' '
+				elsif ttt_board[2] == opponent && ttt_board[6].is_a?(Integer)
 					results = 6
-				elsif ttt_board[6] == opponent && ttt_board[2] == ' '
+				elsif ttt_board[6] == opponent && ttt_board[2].is_a?(Integer)
 					results = 2
-				elsif ttt_board[8] == opponent && ttt_board[0] == ' '
+				elsif ttt_board[8] == opponent && ttt_board[0].is_a?(Integer)
 					results = 0
 				else
-					results = 9
+					results = 10
 				end
 				results
 	end
@@ -246,16 +246,16 @@ require_relative 'board.rb'
 
 	def empty_corner(ttt_board)
 
-		if ttt_board[0] == ' '
+		if ttt_board[0] == 1
 			results = 0
-		elsif ttt_board[2] == ' '
+		elsif ttt_board[2] == 3
 			results = 2
-		elsif ttt_board[6] == ' '
+		elsif ttt_board[6] == 7
 			results = 6
-		elsif ttt_board[8] == ' '
+		elsif ttt_board[8] == 9
 			results = 8
 		else 
-			results = 9
+			results = 10
 		end
 		results
 	end
@@ -263,16 +263,16 @@ require_relative 'board.rb'
 
 		def empty_side(ttt_board)
 
-		if ttt_board[1] == ' '
+		if ttt_board[1] == 2
 			results = 1
-		elsif ttt_board[3] == ' '
+		elsif ttt_board[3] == 4
 			results = 3
-		elsif ttt_board[5] == ' '
+		elsif ttt_board[5] == 6
 			results = 5
-		elsif ttt_board[7] == ' '
+		elsif ttt_board[7] == 8
 			results = 7
 		else 
-			results = 9
+			results = 10
 		end
 		results
 	end
