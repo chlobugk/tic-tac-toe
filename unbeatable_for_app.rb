@@ -61,8 +61,8 @@ require_relative 'tic_tac_board.rb'
 			results = 10
 			board_pos.each_with_index do |win_combo, index|
 
-				if win_combo.count(marker) == 2 && win_combo.count(Integer) == 1
-					winning_index = win_combo.index(Integer)
+				if win_combo.count(marker) == 2 && win_combo.count { |x| x.is_a?(Integer) } == 1
+					winning_index = win_combo.index { |x| x.is_a?(Integer) }
 					results = win_array[index][winning_index]
 				else
 					results
