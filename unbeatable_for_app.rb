@@ -167,12 +167,12 @@ require_relative 'tic_tac_board.rb'
 				[ttt_board[2], ttt_board[4], ttt_board[6]]
 						]
 
-			opponent = 'x'
+			opponent = 'X'
 
-			if marker == 'x'
-				opponent = 'o'
+			if marker == 'X'
+				opponent = 'O'
 			else
-				opponent = 'x'
+				opponent = 'X'
 			end
 		
 			ind = []
@@ -190,7 +190,7 @@ require_relative 'tic_tac_board.rb'
 			result_array = []
 			fork_square = fork_square.flatten.sort #flatten turns multidimensional array into 1 array; sort puts in order (board positions that are in array)
 			fork_square.each do |square|
-				if ttt_board[square] == Integer
+				if ttt_board[square].is_a?(Integer)
 					result_array << square #result_array contains all positions that work and are empty
 				end
 			end
