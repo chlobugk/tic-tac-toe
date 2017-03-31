@@ -1,6 +1,7 @@
 require 'sinatra'
 require_relative 'tic_tac_board.rb'
-require_relative 'player_classes'
+require_relative 'player_classes.rb'
+require_relative 'unbeatable_for_app.rb'
 
 enable :sessions
 
@@ -93,7 +94,7 @@ get '/change_player' do
 	else
 		redirect '/move'
 	end
-end
+end 
 
 
 

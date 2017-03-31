@@ -61,8 +61,8 @@ require_relative 'tic_tac_board.rb'
 			results = 10
 			board_pos.each_with_index do |win_combo, index|
 
-				if win_combo.count(marker) == 2 && win_combo.count(' ') == 1
-					winning_index = win_combo.index(' ')
+				if win_combo.count(marker) == 2 && win_combo.count(Integer) == 1
+					winning_index = win_combo.index(Integer)
 					results = win_array[index][winning_index]
 				else
 					results
@@ -97,8 +97,8 @@ require_relative 'tic_tac_board.rb'
 			results = 10
 			board_pos.each_with_index do |win_combo, index|
 
-				if win_combo.count(opponent) == 2 && win_combo.count(' ') == 1
-					winning_index = win_combo.index(' ')
+				if win_combo.count(opponent) == 2 && win_combo.count(Integer) == 1
+					winning_index = win_combo.index(Integer)
 					results = win_array[index][winning_index]
 				else
 					results
@@ -125,7 +125,7 @@ require_relative 'tic_tac_board.rb'
 		
 			ind = []
 			fork_pos.each_with_index do |fork_combo, fork_index|
-				if fork_combo.count(marker) == 1 && fork_combo.count(' ') == 2
+				if fork_combo.count(marker) == 1 && fork_combo.count(Integer) == 2
 					ind << fork_index #ind now contains the index of all rows (from fork_pos) that have 1 spot filled
 				end
 			end
@@ -138,7 +138,7 @@ require_relative 'tic_tac_board.rb'
 			result_array = []
 			fork_square = fork_square.flatten.sort #flatten turns multidimensional array into 1 array; sort puts in order (board positions that are in array)
 			fork_square.each do |square|
-				if ttt_board[square] == ' '
+				if ttt_board[square] == Integer
 					result_array << square #result_array contains all positions that work and are empty
 				end
 			end
@@ -177,7 +177,7 @@ require_relative 'tic_tac_board.rb'
 		
 			ind = []
 			fork_pos.each_with_index do |fork_combo, fork_index|
-				if fork_combo.count(opponent) == 1 && fork_combo.count(' ') == 2
+				if fork_combo.count(opponent) == 1 && fork_combo.count(Integer) == 2
 					ind << fork_index #ind now contains the index of all rows (from fork_pos) that have 1 spot filled
 				end
 			end
@@ -190,14 +190,14 @@ require_relative 'tic_tac_board.rb'
 			result_array = []
 			fork_square = fork_square.flatten.sort #flatten turns multidimensional array into 1 array; sort puts in order (board positions that are in array)
 			fork_square.each do |square|
-				if ttt_board[square] == ' '
+				if ttt_board[square] == Integer
 					result_array << square #result_array contains all positions that work and are empty
 				end
 			end
 
-			if ttt_board == [' ', ' ', opponent, ' ', marker, ' ', opponent, ' ', ' ']
+			if ttt_board == [1, 2, opponent, 4, marker, 6, opponent, 8, 9]
 				results = 3
-			elsif ttt_board == [opponent, ' ', ' ', ' ', marker, ' ', ' ', ' ', opponent]
+			elsif ttt_board == [opponent, 2, 3, 4, marker, 6, 7, 8, opponent]
 				results = 3
 			elsif result_array.find { |combo| result_array.count(combo) > 1 } == nil #checks if a match is found
 				results = 10
@@ -210,7 +210,7 @@ require_relative 'tic_tac_board.rb'
 
 	def center(ttt_board)
 
-		if ttt_board[4] == ' '
+		if ttt_board[4] == 5
 			results = 4
 		else
 			results = 10
