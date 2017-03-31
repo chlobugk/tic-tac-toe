@@ -86,19 +86,19 @@ require_relative 'tic_tac_board.rb'
 				[ttt_board[2], ttt_board[4], ttt_board[6]]
 						]
 
-			opponent = 'x'
+			opponent = 'X'
 
-			if marker == 'x'
-				opponent = 'o'
+			if marker == 'X'
+				opponent = 'O'
 			else
-				opponent = 'x'
+				opponent = 'O'
 			end
 
 			results = 10
 			board_pos.each_with_index do |win_combo, index|
 
-				if win_combo.count(opponent) == 2 && win_combo.count(Integer) == 1
-					winning_index = win_combo.index(Integer)
+				if win_combo.count(opponent) == 2 && win_combo.count { |x| x.is_a?(Integer) } == 1
+					winning_index = win_combo.index { |x| x.is_a?(Integer) }
 					results = win_array[index][winning_index]
 				else
 					results
@@ -125,7 +125,7 @@ require_relative 'tic_tac_board.rb'
 		
 			ind = []
 			fork_pos.each_with_index do |fork_combo, fork_index|
-				if fork_combo.count(marker) == 1 && fork_combo.count(Integer) == 2
+				if fork_combo.count(marker) == 1 && fork_combo.count { |x| x.is_a?(Integer) } == 2
 					ind << fork_index #ind now contains the index of all rows (from fork_pos) that have 1 spot filled
 				end
 			end
@@ -177,7 +177,7 @@ require_relative 'tic_tac_board.rb'
 		
 			ind = []
 			fork_pos.each_with_index do |fork_combo, fork_index|
-				if fork_combo.count(opponent) == 1 && fork_combo.count(Integer) == 2
+				if fork_combo.count(opponent) == 1 && fork_combo.count { |x| x.is_a?(Integer) } == 2
 					ind << fork_index #ind now contains the index of all rows (from fork_pos) that have 1 spot filled
 				end
 			end

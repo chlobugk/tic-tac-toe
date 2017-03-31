@@ -52,7 +52,7 @@ class TestUnbeatable < MiniTest::Test
 
 	def test_block2
 		player = Unbeatable_AI.new('x') 
-		ttt_board = ['o', '  ', ' ', ' ', 'o', ' ', ' ', 'x', ' ']
+		ttt_board = ['o', ' ', ' ', ' ', 'o', ' ', ' ', 'x', ' ']
 		assert_equal(8, player.block(ttt_board))
 	end
 

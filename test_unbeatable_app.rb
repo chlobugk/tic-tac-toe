@@ -8,6 +8,11 @@ class TestUnbeatableInput < MiniTest::Test
 		assert_equal(2, player.win(['O','O',3,4,5,6,7,8,9]))
 	end
 
+	def test_take_block
+		player = Unbeatable_App.new('X')
+		assert_equal(8, player.block(['O',2,'X',4,'O',6,7,8,9]))
+	end
+
 	def test_take_center
 		player = Unbeatable_App.new('X')
 		assert_equal(4, player.center(['O',2,3,4,5,6,7,8,9]))
@@ -17,4 +22,6 @@ class TestUnbeatableInput < MiniTest::Test
 		player = Unbeatable_App.new('X')
 		assert_equal(8, player.opposite_corner(['O',2,3,4,5,6,7,8,9]))
 	end
+
+
 end
