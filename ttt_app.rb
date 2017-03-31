@@ -71,9 +71,11 @@ end
 get '/check_game' do
 
 	if session[:board].winner?(session[:active_player].marker)
-		erb :win, :locals => {:active_player => session[:active_player].marker}
+		results = "#{session[:active_player].marker} is the winner!"
+		erb :results, :locals => {:board => session[:board], :results => results}
 	elsif session[:board].full_board?
-		erb :tie
+		results = "Tie game!"
+		erb :results, :locals => {:board => session[:board], :results => results}
 	else
 		redirect '/change_player'
 	end
