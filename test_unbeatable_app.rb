@@ -33,5 +33,15 @@ class TestUnbeatableInput < MiniTest::Test
 		assert_equal(8, player.opposite_corner(['O',2,3,4,5,6,7,8,9]))
 	end
 
+	def test_empty_corner
+		player = Unbeatable_App.new('O')
+		assert_equal(8, player.empty_corner(['X',2,'O',4,5,6,'X',8,9]))
+	end
+
+	def test_empty_side
+		player = Unbeatable_App.new('O')
+		assert_equal(1, player.empty_side(['X',2,'O','X',5,6,'O',8,'X']))
+	end
+
 
 end
