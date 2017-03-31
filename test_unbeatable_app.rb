@@ -13,6 +13,11 @@ class TestUnbeatableInput < MiniTest::Test
 		assert_equal(8, player.block(['O',2,'X',4,'O',6,7,8,9]))
 	end
 
+	def test_take_fork
+		player = Unbeatable_App.new('X')
+		assert_equal(2, player.check_fork([1,'X',3,4,'O','X',7,'O',9]))
+	end
+
 	def test_take_center
 		player = Unbeatable_App.new('X')
 		assert_equal(4, player.center(['O',2,3,4,5,6,7,8,9]))
