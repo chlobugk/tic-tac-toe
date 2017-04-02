@@ -91,7 +91,7 @@ require_relative 'tic_tac_board.rb'
 			if marker == 'X'
 				opponent = 'O'
 			else
-				opponent = 'O'
+				opponent = 'X'
 			end
 
 			results = 10
