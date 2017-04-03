@@ -40,7 +40,7 @@ end
 
 get '/board' do
 
-	erb :board, :locals => {:board => session[:board], :p1 => session[:p1], :opponent => session[:opp], :active_player => session[:active_player]}
+	erb :board, :locals => {:board => session[:board], :p1 => session[:p1], :opponent => session[:opp], :active_player => session[:active_player].marker}
 	# move = session[:active_player].fill_move(session[:board].ttt_board)
 end
 

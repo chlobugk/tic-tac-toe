@@ -1,7 +1,28 @@
-<center><h1>Tic Tac Toe</h1> <p>
+<center><h1>Tic Tac Toe</h1> 
+<h3><p>It's <%=active_player%>'s turn.</p></h3>
 	   
 <form action ='user_move' method='post'>
 	<input type='text' name='opponent' value= session[:opponent] hidden>
+
+<!-- <div id="board">
+    <table>
+      <tr id="row1">
+        <td class="square"><input type="submit" name='square' value= <%=board.ttt_board[0]%>></td>
+        <td class="square v"><input type="submit" name='square' value= <%=board.ttt_board[1]%>></td>
+        <td class="square"><input type="submit" name='square' value= <%=board.ttt_board[2]%>></td>
+      </tr>
+      <tr id="row2">
+        <td class="square h"><input type="submit" name='square' value= <%=board.ttt_board[3]%>></td>
+        <td class="square v h"><input type="submit" name='square' value= <%=board.ttt_board[4]%>></td>
+        <td class="square h"><input type="submit" name='square' value= <%=board.ttt_board[5]%>></td>
+      </tr>
+      <tr id="row3">
+        <td class="square"><input type="submit" name='square' value= <%=board.ttt_board[6]%>></td>
+        <td class="square v"><input type="submit" name='square' value= <%=board.ttt_board[7]%>></td>
+        <td class="square"><input type="submit" name='square' value= <%=board.ttt_board[8]%>></td>
+      </tr>
+    </table>
+  </div> -->
 
 	<h2>
 	<input type="submit" name='square' value= <%=board.ttt_board[0]%>> | 
