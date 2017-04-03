@@ -10,6 +10,11 @@ font-family: arial;
 color: darkslateblue;
 }
 
+.header{
+background-color: darkslateblue;
+color: white;
+}
+
 .center{
 text-align: center;
 }
