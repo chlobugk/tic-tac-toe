@@ -1,60 +1,24 @@
 <center><h2><%=results%><p></p></h2>
 
-<div id="board">
-    <table>
-      <tr id="row1">
-        <td class="square center"><input type="submit" name='square' value= <%=board.ttt_board[0]%>   
-       	 	<% if board.ttt_board[0] == 'X' || board.ttt_board[0] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
+<table class="table">
+<% num = -1 %>
+<% board_length.to_i.times do %>
 
-        <td class="square v center"><input type="submit" name='square' value= <%=board.ttt_board[1]%>
-        	<% if board.ttt_board[1] == 'X' || board.ttt_board[1] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
+    <tr>
+      <td>
+      <% board_length.to_i.times do 
+        num += 1 %>
+        <input class="button" type="submit" name='square' value= <%=board.ttt_board[num]%>
+        <% if board.ttt_board[num] == 'X' || board.ttt_board[num] == 'O' %>
+           style="background-color:lightgreen;border:none;width:29px;height:33px;font-size:18px"
+          <% end %> >
+      <% end %>
+      </td>
+    </tr><br>
 
-        <td class="square center"><input type="submit" name='square' value= <%=board.ttt_board[2]%>
-        	<% if board.ttt_board[2] == 'X' || board.ttt_board[2] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
+  <% end %>
 
-      </tr>
-      <tr id="row2">
-        <td class="square h center"><input type="submit" name='square' value= <%=board.ttt_board[3]%>
-        	<% if board.ttt_board[3] == 'X' || board.ttt_board[3] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
-
-        <td class="square v h center"><input type="submit" name='square' value= <%=board.ttt_board[4]%>
-        	<% if board.ttt_board[4] == 'X' || board.ttt_board[4] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
-
-        <td class="square h center"><input type="submit" name='square' value= <%=board.ttt_board[5]%>
-        	<% if board.ttt_board[5] == 'X' || board.ttt_board[5] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
-
-      </tr>
-      <tr id="row3">
-        <td class="square center"><input type="submit" name='square' value= <%=board.ttt_board[6]%>
-        	<% if board.ttt_board[6] == 'X' || board.ttt_board[6] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
-
-        <td class="square v center"><input type="submit" name='square' value= <%=board.ttt_board[7]%>
-        	<% if board.ttt_board[7] == 'X' || board.ttt_board[7] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
-
-        <td class="square center"><input type="submit" name='square' value= <%=board.ttt_board[8]%>
-        	<% if board.ttt_board[8] == 'X' || board.ttt_board[8] == 'O' %>
-       		 class ="submit" 
-       		<% end %>></td>
-
-      </tr>
-    </table>
-  </div>
+</table>
 
 	<p><h2><a href='/' style="color:deeppink">Play Again</a></h2>
 </center>
