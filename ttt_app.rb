@@ -1,7 +1,7 @@
 require 'sinatra'
 require_relative 'board.rb'
 require_relative 'player_classes.rb'
-# require_relative 'unbeatable_for_app.rb'
+require_relative 'unbeatable_for_app.rb'
 
 enable :sessions
 
@@ -16,28 +16,34 @@ post '/board_length' do
 	session[:board] = Board.new(params[:board_length])
 	session[:p1] = User_App.new('X')
 	session[:active_player] = session[:p1]
-	session[:opp] = User_App.new('O')
 	session[:board_length] = params[:board_length]
-	# opponent = params[:opponent]
-	# session[:human] = nil
-
-		# if opponent == 'Human'
-		# 	session[:opp] = User_App.new('O')
-		# 	session[:human] = 'fill_human'
-
-		# elsif opponent == 'Sequential'
-		# 	session[:opp] = Sequential_App.new('O')
-
-		# elsif opponent == 'Random'
-		# 	session[:opp] = Random_App.new('O')
-
-		# else opponent == 'Unbeatable'
-		# 	session[:opp] = Unbeatable_App.new('O')
-		# end
-
+	if params[:board_length].to_i == 3
+		erb :ai_input
+	else
+		session[:opp] = User_App.new('O')
+		session[:human] = 'fill_human'
 		redirect '/board'
+	end
 end
 
+post '/ai' do
+	opponent = params[:opponent]
+	session[:human] = nil
+	if opponent == 'Human'
+			session[:opp] = User_App.new('O')
+			session[:human] = 'fill_human'
+
+		elsif opponent == 'Sequential'
+			session[:opp] = Sequential_App.new('O')
+
+		elsif opponent == 'Random'
+			session[:opp] = Random_App.new('O')
+
+		else opponent == 'Unbeatable'
+			session[:opp] = Unbeatable_App.new('O')
+		end
+	redirect '/board'
+end
 
 get '/board' do
 
@@ -46,13 +52,13 @@ get '/board' do
 end
 
 
-# get '/move' do
-# 	move = session[:active_player].fill_move(session[:board].ttt_board)
-# 	# session[:board].update_position((move), session[:active_player].marker)
-# 	session[:board].update_position(move, session[:active_player].marker)
+get '/move' do
+	move = session[:active_player].fill_move(session[:board].ttt_board)
+	# session[:board].update_position((move), session[:active_player].marker)
+	session[:board].update_position(move, session[:active_player].marker)
 
-# 	redirect '/check_game'
-# end
+	redirect '/check_game'
+end
 
 
 post '/user_move' do
@@ -92,11 +98,11 @@ get '/change_player' do
 		session[:active_player] = session[:p1]
 	end
 
-	# if session[:active_player] == session[:p1] || (session[:active_player] == session[:opp] && session[:human] == 'fill_human')
+	if session[:active_player] == session[:p1] || (session[:active_player] == session[:opp] && session[:human] == 'fill_human')
 		redirect '/board'
-	# else
-	# 	redirect '/move'
-	# end
+	else
+		redirect '/move'
+	end
 end 
 
 
